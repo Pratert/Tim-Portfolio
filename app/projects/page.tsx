@@ -1,7 +1,9 @@
+"use client";
 import PageShell from "../components/PageShell";
 import PageHeader from "../components/PageHeader";
 import Link from "next/link";
 import { projects } from "../content/projects";
+import DiagramViewerButton from "../components/DiagramViewerButton";
 
 const statusConfig: Record<string, { label: string; classes: string }> = {
   active:        { label: "Active",       classes: "bg-emerald-50 text-emerald-700 border-emerald-200" },
@@ -140,19 +142,28 @@ export default function Page() {
                 </div>
 
                 {/* Documents footer */}
-                {p.documents && p.documents.length > 0 && (
-                  <div className="border-t border-neutral-100 px-6 py-3 flex items-center gap-6">
+                {(p.documents && p.documents.length > 0 || p.diagrams && p.diagrams.length > 0) && (
+                  <div className="border-t border-neutral-100 px-6 py-3 flex items-center gap-6 flex-wrap">
                     <p className="text-xs uppercase tracking-widest text-neutral-400">Documents</p>
-                    <div className="flex gap-4">
-                      {p.documents.map((d) => (
+                    <div className="flex gap-4 flex-wrap items-center">
+                      {p.documents && p.documents.map((d) => (
                         <span key={d.label} className="text-xs text-neutral-400">
                           {d.label}
                           {d.note && <span className="text-neutral-300 ml-1">({d.note})</span>}
                         </span>
                       ))}
+                      {p.diagrams && p.diagrams.map((d) => (
+                        <DiagramViewerButton
+                          key={d.label}
+                          src={d.src}
+                          title={d.label}
+                          label={d.label}
+                        />
+                      ))}
                     </div>
                   </div>
                 )}
+
               </div>
             );
           })}

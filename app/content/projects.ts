@@ -4,6 +4,12 @@ export type Document = {
   note?: string;
 };
 
+export type Diagram = {
+  label: string;
+  description: string;
+  src: string;
+};
+
 export type Project = {
   slug: string;
   name: string;
@@ -15,6 +21,7 @@ export type Project = {
   overview: string;
   highlights: string[];
   documents?: Document[];
+  diagrams?: Diagram[];
 };
 
 export const projects: Project[] = [
@@ -37,6 +44,18 @@ export const projects: Project[] = [
       "CloudFront access logs delivered to S3, cataloged in Glue, queried with Athena",
       "IAM least-privilege access model throughout",
     ],
+    diagrams: [
+      {
+        label: "High-Level Architecture",
+        description: "Full platform architecture across all 12 components",
+        src: "/diagrams/hld-portfolio-platform.png",
+      },
+      {
+        label: "CI/CD Pipeline Architecture",
+        description: "End-to-end build and deploy pipeline flow",
+        src: "/diagrams/hld-cicd-pipeline.png",
+      },
+    ],
     stack: {
       aws: ["S3", "CloudFront", "CodePipeline", "CodeBuild", "API Gateway", "Lambda", "SES", "SNS", "CloudWatch", "Glue", "Athena", "WAF"],
       app: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
@@ -44,10 +63,6 @@ export const projects: Project[] = [
       pipeline: ["CI/CD", "CodePipeline", "CodeBuild", "GitHub"],
       practices: ["Serverless", "Static-first", "Least privilege IAM", "Observability", "IaC"],
     },
-    documents: [
-      { label: "High-Level Design (HLD)", href: "/docs/portfolio-platform-hld.pdf", note: "Coming soon" },
-      { label: "Low-Level Design (LLD)", href: "/docs/portfolio-platform-lld.pdf", note: "Coming soon" },
-    ],
   },
 
   {

@@ -3,6 +3,7 @@ import Link from "next/link";
 import PageShell from "../../components/PageShell";
 import PageHeader from "../../components/PageHeader";
 import { projects } from "../../content/projects";
+import DiagramViewerButton from "../../components/DiagramViewerButton";
 
 export async function generateStaticParams() {
   return projects.map((project) => ({
@@ -98,11 +99,49 @@ export default async function ProjectDetailPage({ params }: Props) {
         {/* Architecture */}
         <div>
           <p className="text-xs uppercase tracking-widest text-neutral-400 mb-4">Architecture</p>
-          <div className="border border-neutral-200 rounded-xl px-6 py-8 text-center">
-            <p className="text-sm text-neutral-500">
-              Architecture diagram coming soon. HLD and LLD documents will be linked below when complete.
-            </p>
-          </div>
+          {project.diagrams && project.diagrams.length > 0 ? (
+            <div className="grid md:grid-cols-2 gap-6">
+              {project.diagrams.map((d) => (
+                <div key={d.label} className="border border-neutral-200 rounded-xl overflow-hidden">
+                  <DiagramViewerButton
+                    src={d.src}
+                    title={d.label}
+                    className="block w-full relative group cursor-pointer"
+                  >
+                    <img
+                      src={d.src}
+                      alt={d.label}
+                      draggable={false}
+                      className="w-full object-cover rounded-t-xl"
+                      style={{ userSelect: "none", pointerEvents: "none" }}
+                    />
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors rounded-t-xl flex items-center justify-center">
+                      <span className="opacity-0 group-hover:opacity-100 transition-opacity bg-black/60 text-white text-xs px-3 py-1.5 rounded">
+                        Click to view full size
+                      </span>
+                    </div>
+                  </DiagramViewerButton>
+                  <div className="px-4 py-3 flex items-center justify-between border-t border-neutral-100">
+                    <div>
+                      <p className="text-sm font-medium text-neutral-900">{d.label}</p>
+                      <p className="text-xs text-neutral-400 mt-0.5">{d.description}</p>
+                    </div>
+                    <DiagramViewerButton
+                      src={d.src}
+                      title={d.label}
+                      label="View full size"
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="border border-neutral-200 rounded-xl px-6 py-8 text-center">
+              <p className="text-sm text-neutral-500">
+                Architecture diagram coming soon. HLD and LLD documents will be linked below when complete.
+              </p>
+            </div>
+          )}
         </div>
 
         <hr className="border-neutral-200" />
