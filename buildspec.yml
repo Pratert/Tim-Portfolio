@@ -1,0 +1,27 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 20
+    commands:
+      - echo Installing dependencies...
+      - npm ci
+
+  build:
+    commands:
+      - echo Building Next.js site...
+      - npm run build
+
+  post_build:
+    commands:
+      - echo Syncing to S3...
+      - aws s3 sync out/ s3://www.tim-prater.com --delete
+      - echo Invalidating CloudFront cache...
+      - aws cloudfront create-invalidation --distribution-id E2HO9C088LARRB --paths "/*"
+      - echo Deploy complete.
+
+artifacts:
+  files:
+    - "**/*"
+  base-directory: out
