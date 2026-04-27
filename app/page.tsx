@@ -159,16 +159,7 @@ export default function Home() {
                 </div>
               ))}
             </div>
-            <p className="mt-3 text-xs" style={{ color: "var(--text-muted)" }}>
-              For a full listing of technologies, platforms, and tools see the{" "}
-              <a
-                href="/technology/"
-                style={{ color: "var(--accent)", textDecoration: "underline", textUnderlineOffset: "3px" }}
-              >
-                Technical Expertise
-              </a>{" "}
-              page.
-            </p>
+            
           </div>
 
         </div>
