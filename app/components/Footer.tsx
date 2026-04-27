@@ -10,11 +10,10 @@ export default function Footer() {
   website notes
 </p>
         <p className="text-sm leading-relaxed text-neutral-600">
-          Hi there!  I built this site with Next.js and host it on AWS using Amazon S3 and an Amazon CloudFront
-          distribution. The platform is monitored with Amazon CloudWatch. The CloudWatch Alarms
-          publish notifications to an Amazon SNS topic, which delivers alerts via email and SMS
-          subscriptions. Site usage is captured through CloudFront access logs delivered to Amazon
-          S3, cataloged in the AWS Glue Data Catalog, and analyzed with Amazon Athena (SQL).
+          Hi there! I built this site with Next.js and host it on AWS using Amazon S3 and an Amazon CloudFront distribution. 
+          Changes are deployed automatically through a CI/CD pipeline built on AWS CodePipeline and AWS CodeBuild, triggered by pushes to the main branch on GitHub. 
+          The platform is monitored with Amazon CloudWatch. CloudWatch Alarms publish notifications to an Amazon SNS topic, which delivers alerts via email and SMS subscriptions. 
+          Site usage is captured through CloudFront access logs delivered to Amazon S3, cataloged in the AWS Glue Data Catalog, and analyzed with Amazon Athena (SQL).
         </p>
 
         <p className="mt-4 text-sm text-neutral-600">

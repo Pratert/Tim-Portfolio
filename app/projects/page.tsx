@@ -62,11 +62,105 @@ export default function Page() {
     <PageShell>
       <PageHeader
         title="Projects"
-        subtitle="Selected professional work delivered at scale, and portfolio builds with architecture documentation."
+        subtitle="Portfolio builds with architecture documentation, and selected professional work delivered at scale."
       />
 
-      {/* Section 1: Professional work */}
+      {/* Section 1: Portfolio builds */}
       <div className="mt-10 mb-16">
+        <p className="text-xs uppercase tracking-widest text-neutral-400 mb-2">
+          Portfolio Builds
+        </p>
+        <p className="text-sm text-neutral-500 max-w-2xl leading-relaxed mb-8">
+          Personal builds demonstrating cloud architecture, systems design, and engineering
+          discipline. Each project includes a High-Level Design and Low-Level Design document.
+        </p>
+        <div className="space-y-6 mb-4">
+          {projects.map((p) => {
+            const status = statusConfig[p.status] ?? statusConfig.planned;
+            return (
+              <div key={p.slug} className="border border-neutral-200 rounded-xl overflow-hidden">
+
+                {/* Card header */}
+                <div className="bg-neutral-50 border-b border-neutral-200 px-6 py-5 flex items-start justify-between gap-4">
+                  <div>
+                    <div className="flex items-center gap-3 mb-1">
+                      <p className="text-xs uppercase tracking-widest text-neutral-400">
+                        {p.domain}
+                      </p>
+                      <span className={`text-xs border px-2 py-0.5 rounded-full ${status.classes}`}>
+                        {status.label}
+                      </span>
+                    </div>
+                    <p className="text-lg font-semibold text-neutral-900 leading-snug">{p.name}</p>
+                    <p className="text-sm text-neutral-500 mt-0.5">{p.tagline}</p>
+                  </div>
+                  <Link
+                    href={`/projects/${p.slug}`}
+                    className="shrink-0 inline-flex items-center gap-1.5 text-xs text-neutral-700 border border-neutral-300 px-3 py-1.5 rounded hover:bg-neutral-100 transition-colors"
+                  >
+                    View details
+                    <svg xmlns="http://www.w3.org/2000/svg" className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                  </Link>
+                </div>
+
+                {/* Card body */}
+                <div className="px-6 py-5 grid md:grid-cols-3 gap-8">
+                  <div className="md:col-span-2">
+                    <p className="text-sm text-neutral-600 leading-relaxed mb-4">{p.summary}</p>
+                    <ul className="space-y-1.5">
+                      {p.highlights.slice(0, 4).map((h) => (
+                        <li key={h} className="flex gap-3 text-sm text-neutral-600">
+                          <span className="mt-1 shrink-0 w-1 h-1 rounded-full bg-neutral-400 translate-y-1.5" />
+                          <span>{h}</span>
+                        </li>
+                      ))}
+                      {p.highlights.length > 4 && (
+                        <li className="text-xs text-neutral-400 pl-4">
+                          +{p.highlights.length - 4} more on detail page
+                        </li>
+                      )}
+                    </ul>
+                  </div>
+                  <div className="space-y-4">
+                    {Object.entries(p.stack).map(([group, items]) => (
+                      <div key={group}>
+                        <p className="text-xs uppercase tracking-widest text-neutral-400 mb-2">{group}</p>
+                        <div className="flex flex-wrap gap-1.5">
+                          {items.map((item) => (
+                            <span key={`${group}:${item}`} className="text-xs border border-neutral-200 bg-white px-2 py-0.5 rounded text-neutral-600">
+                              {item}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Documents footer */}
+                {p.documents && p.documents.length > 0 && (
+                  <div className="border-t border-neutral-100 px-6 py-3 flex items-center gap-6">
+                    <p className="text-xs uppercase tracking-widest text-neutral-400">Documents</p>
+                    <div className="flex gap-4">
+                      {p.documents.map((d) => (
+                        <span key={d.label} className="text-xs text-neutral-400">
+                          {d.label}
+                          {d.note && <span className="text-neutral-300 ml-1">({d.note})</span>}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Section divider */}
+      <div className="border-t border-neutral-200 pt-12 mb-10">
         <p className="text-xs uppercase tracking-widest text-neutral-400 mb-2">
           Selected Professional Work
         </p>
@@ -75,161 +169,67 @@ export default function Page() {
           details are confidential. Redacted architecture diagrams are available upon request
           via the Contact page.
         </p>
-        <div className="space-y-6">
-          {professionalWork.map((p) => (
-            <div key={p.slug} className="border border-neutral-200 rounded-xl overflow-hidden">
+      </div>
 
-              {/* Card header */}
-              <div className="bg-neutral-50 border-b border-neutral-200 px-6 py-5 flex items-start justify-between gap-4">
-                <div>
-                  <div className="flex items-center gap-3 mb-1">
-                    <p className="text-xs uppercase tracking-widest text-neutral-400">{p.domain}</p>
-                    <span className="text-xs border border-neutral-200 bg-white px-2 py-0.5 rounded-full text-neutral-500">
-                      Confidential
-                    </span>
-                  </div>
-                  <p className="text-lg font-semibold text-neutral-900 leading-snug">{p.name}</p>
-                  <p className="text-sm text-neutral-500 mt-0.5">{p.tagline}</p>
+      {/* Section 2: Professional work */}
+      <div className="space-y-6">
+        {professionalWork.map((p) => (
+          <div key={p.slug} className="border border-neutral-200 rounded-xl overflow-hidden">
+
+            {/* Card header */}
+            <div className="bg-neutral-50 border-b border-neutral-200 px-6 py-5 flex items-start justify-between gap-4">
+              <div>
+                <div className="flex items-center gap-3 mb-1">
+                  <p className="text-xs uppercase tracking-widest text-neutral-400">{p.domain}</p>
+                  <span className="text-xs border border-neutral-200 bg-white px-2 py-0.5 rounded-full text-neutral-500">
+                    Confidential
+                  </span>
                 </div>
-                <span className="shrink-0 text-xs text-neutral-400 border border-neutral-200 bg-white px-3 py-1.5 rounded">
-                  {p.scope}
-                </span>
+                <p className="text-lg font-semibold text-neutral-900 leading-snug">{p.name}</p>
+                <p className="text-sm text-neutral-500 mt-0.5">{p.tagline}</p>
               </div>
-
-              {/* Card body */}
-              <div className="px-6 py-5 grid md:grid-cols-3 gap-8">
-                <div className="md:col-span-2">
-                  <p className="text-sm text-neutral-600 leading-relaxed mb-4">{p.summary}</p>
-                  <ul className="space-y-1.5">
-                    {p.highlights.map((h) => (
-                      <li key={h} className="flex gap-3 text-sm text-neutral-600">
-                        <span className="mt-1 shrink-0 w-1 h-1 rounded-full bg-neutral-400 translate-y-1.5" />
-                        <span>{h}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="flex flex-col justify-between">
-                  <div className="border border-neutral-100 rounded-lg px-4 py-4 bg-neutral-50">
-                    <p className="text-xs uppercase tracking-widest text-neutral-400 mb-2">
-                      Architecture diagrams
-                    </p>
-                    <p className="text-xs text-neutral-500 leading-relaxed mb-3">
-                      Redacted versions of architecture diagrams for this engagement are available
-                      upon request.
-                    </p>
-                    <Link
-                      href="/contact"
-                      className="inline-flex items-center gap-1.5 text-xs text-neutral-700 border border-neutral-300 px-3 py-1.5 rounded hover:bg-white transition-colors"
-                    >
-                      Request diagrams
-                      <svg xmlns="http://www.w3.org/2000/svg" className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M5 12h14M12 5l7 7-7 7" />
-                      </svg>
-                    </Link>
-                  </div>
-                </div>
-              </div>
-
+              <span className="shrink-0 text-xs text-neutral-400 border border-neutral-200 bg-white px-3 py-1.5 rounded">
+                {p.scope}
+              </span>
             </div>
-          ))}
-        </div>
-      </div>
 
-      {/* Section divider */}
-      <div className="border-t border-neutral-200 pt-12 mb-10">
-        <p className="text-xs uppercase tracking-widest text-neutral-400 mb-2">
-          Portfolio Builds
-        </p>
-        <p className="text-sm text-neutral-500 max-w-2xl leading-relaxed mb-8">
-          Personal builds demonstrating cloud architecture, systems design, and engineering
-          discipline. Each project includes a High-Level Design and Low-Level Design document.
-        </p>
-      </div>
-
-      {/* Section 2: Portfolio builds */}
-      <div className="space-y-6 mb-4">
-        {projects.map((p) => {
-          const status = statusConfig[p.status] ?? statusConfig.planned;
-          return (
-            <div key={p.slug} className="border border-neutral-200 rounded-xl overflow-hidden">
-
-              {/* Card header */}
-              <div className="bg-neutral-50 border-b border-neutral-200 px-6 py-5 flex items-start justify-between gap-4">
-                <div>
-                  <div className="flex items-center gap-3 mb-1">
-                    <p className="text-xs uppercase tracking-widest text-neutral-400">
-                      {p.domain}
-                    </p>
-                    <span className={`text-xs border px-2 py-0.5 rounded-full ${status.classes}`}>
-                      {status.label}
-                    </span>
-                  </div>
-                  <p className="text-lg font-semibold text-neutral-900 leading-snug">{p.name}</p>
-                  <p className="text-sm text-neutral-500 mt-0.5">{p.tagline}</p>
-                </div>
-                <Link
-                  href={`/projects/${p.slug}`}
-                  className="shrink-0 inline-flex items-center gap-1.5 text-xs text-neutral-700 border border-neutral-300 px-3 py-1.5 rounded hover:bg-neutral-100 transition-colors"
-                >
-                  View details
-                  <svg xmlns="http://www.w3.org/2000/svg" className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M5 12h14M12 5l7 7-7 7" />
-                  </svg>
-                </Link>
-              </div>
-
-              {/* Card body */}
-              <div className="px-6 py-5 grid md:grid-cols-3 gap-8">
-                <div className="md:col-span-2">
-                  <p className="text-sm text-neutral-600 leading-relaxed mb-4">{p.summary}</p>
-                  <ul className="space-y-1.5">
-                    {p.highlights.slice(0, 4).map((h) => (
-                      <li key={h} className="flex gap-3 text-sm text-neutral-600">
-                        <span className="mt-1 shrink-0 w-1 h-1 rounded-full bg-neutral-400 translate-y-1.5" />
-                        <span>{h}</span>
-                      </li>
-                    ))}
-                    {p.highlights.length > 4 && (
-                      <li className="text-xs text-neutral-400 pl-4">
-                        +{p.highlights.length - 4} more on detail page
-                      </li>
-                    )}
-                  </ul>
-                </div>
-                <div className="space-y-4">
-                  {Object.entries(p.stack).map(([group, items]) => (
-                    <div key={group}>
-                      <p className="text-xs uppercase tracking-widest text-neutral-400 mb-2">{group}</p>
-                      <div className="flex flex-wrap gap-1.5">
-                        {items.map((item) => (
-                          <span key={`${group}:${item}`} className="text-xs border border-neutral-200 bg-white px-2 py-0.5 rounded text-neutral-600">
-                            {item}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
+            {/* Card body */}
+            <div className="px-6 py-5 grid md:grid-cols-3 gap-8">
+              <div className="md:col-span-2">
+                <p className="text-sm text-neutral-600 leading-relaxed mb-4">{p.summary}</p>
+                <ul className="space-y-1.5">
+                  {p.highlights.map((h) => (
+                    <li key={h} className="flex gap-3 text-sm text-neutral-600">
+                      <span className="mt-1 shrink-0 w-1 h-1 rounded-full bg-neutral-400 translate-y-1.5" />
+                      <span>{h}</span>
+                    </li>
                   ))}
+                </ul>
+              </div>
+              <div className="flex flex-col justify-between">
+                <div className="border border-neutral-100 rounded-lg px-4 py-4 bg-neutral-50">
+                  <p className="text-xs uppercase tracking-widest text-neutral-400 mb-2">
+                    Architecture diagrams
+                  </p>
+                  <p className="text-xs text-neutral-500 leading-relaxed mb-3">
+                    Redacted versions of architecture diagrams for this engagement are available
+                    upon request.
+                  </p>
+                  <Link
+                    href="/contact"
+                    className="inline-flex items-center gap-1.5 text-xs text-neutral-700 border border-neutral-300 px-3 py-1.5 rounded hover:bg-white transition-colors"
+                  >
+                    Request diagrams
+                    <svg xmlns="http://www.w3.org/2000/svg" className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                  </Link>
                 </div>
               </div>
-
-              {/* Documents footer */}
-              {p.documents && p.documents.length > 0 && (
-                <div className="border-t border-neutral-100 px-6 py-3 flex items-center gap-6">
-                  <p className="text-xs uppercase tracking-widest text-neutral-400">Documents</p>
-                  <div className="flex gap-4">
-                    {p.documents.map((d) => (
-                      <span key={d.label} className="text-xs text-neutral-400">
-                        {d.label}
-                        {d.note && <span className="text-neutral-300 ml-1">({d.note})</span>}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              )}
             </div>
-          );
-        })}
+
+          </div>
+        ))}
       </div>
 
     </PageShell>

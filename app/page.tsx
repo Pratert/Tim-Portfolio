@@ -59,7 +59,7 @@ export default function Home() {
         {/* Right col: positioning */}
         <div>
           <h1 className="text-4xl font-semibold tracking-tight leading-snug max-w-2xl">
-            19 years of engineering depth. The leadership track record to match.
+            19 years of engineering depth. The range to match.
           </h1>
 
           <div
@@ -71,22 +71,15 @@ export default function Home() {
               LTE network engineering, IP routing and switching, data pipelines, and systems
               integration across telecom, cloud, and enterprise environments. I was the person
               who understood how things actually worked, not just how they were documented.
-              That foundation took years to build and it never left me.
             </p>
             <p>
-              Over time the scope grew. I moved from supporting systems to designing them, from
-              executing decisions to shaping them. Eventually I became someone leadership relied
-              on for the hard questions: private cellular strategy, nationwide LTE design
-              standards, cloud integration models, and RFP responses that influenced tens of
-              millions of dollars in business.
+              Over time the work expanded. I moved into architecture, pre-sales, and technical strategy, 
+              leading RFP responses that influenced $10M+ in annual business, designing private wireless and cloud-connected solutions for enterprise and government accounts, 
+              and serving as the senior technical voice in rooms where architecture decisions actually got made.
             </p>
             <p>
-              The work I am most proud of is helping turn engineering from a cost center into a
-              revenue generator. I helped design and launch a professional services portfolio
-              that created an entirely new line of business, generating multi-million dollar
-              revenue from capabilities the company already had but had never packaged or sold.
-              That required technical depth, cross-functional leadership, and the ability to
-              translate engineering value into business outcomes.
+              The through line across all of it is the ability to operate at both ends: deep enough to know when an architecture has a real problem, and senior enough to translate that into something a VP or a client can act on. 
+              I have built delivery frameworks from scratch, and taken on the ambiguous work that falls between org chart boxes.
             </p>
             <p>
               Along the way I built and led teams, wrote training programs, created governance

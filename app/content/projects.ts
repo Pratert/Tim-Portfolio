@@ -24,23 +24,24 @@ export const projects: Project[] = [
     tagline: "Full-stack, cloud-hosted, production-grade",
     domain: "Cloud Architecture / Full-Stack",
     summary:
-      "A production-style portfolio site built with Next.js and hosted on AWS. Demonstrates static-first architecture, CDN edge delivery, serverless workflows, and operational observability. This site is the project.",
+      "A production-style portfolio site built with Next.js and hosted on AWS. Demonstrates static-first architecture, CDN edge delivery with WAF protection, a fully automated CI/CD pipeline, and operational observability. This site is the project.",
     status: "active",
     overview:
       "Most portfolio sites are just websites. This one is a working demonstration of cloud-native architecture principles applied to a real production workload. Built with Next.js App Router, hosted on S3 with CloudFront edge distribution, and instrumented with CloudWatch for operational visibility. The contact workflow is fully serverless: API Gateway routes submissions through Lambda to SES for delivery. Infrastructure as Code is in progress using Terraform and CloudFormation. Every architectural decision was made the way it would be made in a professional engineering context: availability first, least privilege access, and observable by default.",
     highlights: [
       "Next.js App Router with reusable layout and shell components",
+      "CI/CD pipeline: GitHub, CodePipeline, and CodeBuild with automatic deploy on push to main",
       "S3 static hosting with CloudFront CDN edge distribution",
       "Serverless contact workflow: API Gateway, Lambda, SES",
       "CloudWatch alarms publishing to SNS for operational alerting",
       "CloudFront access logs delivered to S3, cataloged in Glue, queried with Athena",
-      "Infrastructure as Code: Terraform and CloudFormation (in progress)",
       "IAM least-privilege access model throughout",
     ],
     stack: {
-      aws: ["S3", "CloudFront", "API Gateway", "Lambda", "SES", "SNS", "CloudWatch", "Glue", "Athena"],
+      aws: ["S3", "CloudFront", "CodePipeline", "CodeBuild", "API Gateway", "Lambda", "SES", "SNS", "CloudWatch", "Glue", "Athena", "WAF"],
       app: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
       tooling: ["GitHub", "Git", "VS Code", "Terraform", "CloudFormation"],
+      pipeline: ["CI/CD", "CodePipeline", "CodeBuild", "GitHub"],
       practices: ["Serverless", "Static-first", "Least privilege IAM", "Observability", "IaC"],
     },
     documents: [
