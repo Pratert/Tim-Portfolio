@@ -1,4 +1,5 @@
 import PageShell from "../components/PageShell";
+import DocumentViewerButton from "../components/DocumentViewerButton";
 
 export default function Page() {
   return (
@@ -83,20 +84,22 @@ export default function Page() {
                 </li>
               ))}
             </ul>
-            <a
-              href="/downloads/IDP_Sample_Redacted.pdf"
-              download
-              className="inline-flex items-center gap-1.5 mt-4 text-xs text-blue-700 border border-blue-700 px-3 py-1.5 hover:bg-blue-50 transition-colors"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                <polyline points="7 10 12 15 17 10"/>
-                <line x1="12" y1="15" x2="12" y2="3"/>
-              </svg>
-              Download sample IDP (redacted)
-            </a>
+            
           </div>
-
+            <DocumentViewerButton
+              pages={[
+                "/docs/90_day_IDP_example_Page_1.png",
+                "/docs/90_day_IDP_example_Page_2.png",
+                "/docs/90_day_IDP_example_Page_3.png",
+                "/docs/90_day_IDP_example_Page_4.png",
+                "/docs/90_day_IDP_example_Page_5.png",
+                "/docs/90_day_IDP_example_Page_6.png",
+                "/docs/90_day_IDP_example_Page_7.png",
+              ]}
+              title="90-Day IDP Example (Redacted)"
+              label="View sample IDP (redacted)"
+              thumbnail
+            />
           {/* Cross-functional Tiger Teams */}
           <div>
             <p className="text-sm font-semibold text-neutral-900 mb-3">Cross-functional Tiger Teams</p>

@@ -3,12 +3,14 @@
 import { useEffect, useCallback } from "react";
 
 type Props = {
-  src: string;
+  src: string | string[];
   title: string;
   onClose: () => void;
 };
 
 export default function DiagramViewer({ src, title, onClose }: Props) {
+  const pages = Array.isArray(src) ? src : [src];
+
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
@@ -47,20 +49,39 @@ export default function DiagramViewer({ src, title, onClose }: Props) {
         </button>
       </div>
 
-      {/* Diagram area */}
+      {/* Page count if multi-page */}
+      {pages.length > 1 && (
+        <div
+          className="px-6 py-2 bg-neutral-900 border-b border-neutral-800 shrink-0"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <p className="text-xs text-neutral-500">{pages.length} pages — scroll to view all</p>
+        </div>
+      )}
+
+      {/* Content area */}
       <div
-        className="flex-1 overflow-auto flex items-start justify-center p-6"
+        className="flex-1 overflow-y-auto flex flex-col items-center gap-4 p-6"
         onClick={(e) => e.stopPropagation()}
         onContextMenu={(e) => e.preventDefault()}
       >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={src}
-          alt={title}
-          draggable={false}
-          className="max-w-full rounded select-none"
-          style={{ WebkitUserSelect: "none", userSelect: "none", pointerEvents: "none" }}
-        />
+        {pages.map((page, i) => (
+          <div key={i} className="w-full max-w-4xl">
+            {pages.length > 1 && (
+              <p className="text-xs text-neutral-500 mb-2 text-center">
+                Page {i + 1} of {pages.length}
+              </p>
+            )}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={page}
+              alt={`${title} page ${i + 1}`}
+              draggable={false}
+              className="w-full rounded shadow-lg select-none"
+              style={{ WebkitUserSelect: "none", userSelect: "none", pointerEvents: "none" }}
+            />
+          </div>
+        ))}
       </div>
 
       {/* Copyright bar */}
@@ -69,7 +90,7 @@ export default function DiagramViewer({ src, title, onClose }: Props) {
         onClick={(e) => e.stopPropagation()}
       >
         <p className="text-xs text-neutral-500">
-          © Tim Prater | tim-prater.com | This diagram may not be copied, reproduced, or
+          © Tim Prater | tim-prater.com | This document may not be copied, reproduced, or
           distributed without written consent.
         </p>
         <p className="text-xs text-neutral-600">Press Esc to close</p>
