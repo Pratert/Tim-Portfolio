@@ -29,6 +29,13 @@ export default function Home() {
           <p className="mt-1 text-xs" style={{ color: "var(--text-muted)" }}>
             Knoxville, TN - Remote
           </p>
+          <a
+          href="mailto:tim@tim-prater.com"
+              className="mt-1 block text-xs"
+              style={{ color: "var(--accent)", textDecoration: "underline", textUnderlineOffset: "3px" }}
+            >
+              tim@tim-prater.com
+            </a>
 
           <div className="mt-4 space-y-1">
             {roles.map((r) => (

@@ -23,18 +23,16 @@ export default function Page() {
                 target="_blank"
                 rel="noreferrer"
               >
+                <li>
+                  Email:{" "}
+                  <Link
+                    className="underline underline-offset-4 hover:text-neutral-900"
+                    href="mailto:tim@tim-prater.com"
+                  >
+                    tim@tim-prater.com
+                  </Link>
+                </li>
                 www.linkedin.com/in/tim-prater-ms-2b479176
-              </Link>
-            </li>
-            <li>
-              GitHub:{" "}
-              <Link
-                className="underline underline-offset-4 hover:text-neutral-900"
-                href="https://github.com/Pratert"
-                target="_blank"
-                rel="noreferrer"
-              >
-                https://github.com/Pratert
               </Link>
             </li>
           </ul>
