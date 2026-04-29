@@ -66,7 +66,7 @@ export default function Home() {
         {/* Right col: positioning */}
         <div>
           <h1 className="text-4xl font-semibold tracking-tight leading-snug max-w-2xl">
-            19 years of engineering depth. The range to match.
+            Engineering, Architecture, and Technical Leadership
           </h1>
 
           <div
