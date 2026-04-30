@@ -4,6 +4,7 @@ import PageHeader from "../components/PageHeader";
 import Link from "next/link";
 import { projects } from "../content/projects";
 import DiagramViewerButton from "../components/DiagramViewerButton";
+import DocumentViewerButton from "../components/DocumentViewerButton";
 
 const statusConfig: Record<string, { label: string; classes: string }> = {
   active:        { label: "Active",       classes: "bg-emerald-50 text-emerald-700 border-emerald-200" },
@@ -160,6 +161,13 @@ export default function Page() {
                           label={d.label}
                         />
                       ))}
+                      {p.slug === "portfolio-platform" && (
+                        <DocumentViewerButton
+                          pages={Array.from({ length: 39 }, (_, i) => `/docs/LLD_Portfolio_Platform_v1.7_Page_${i + 1}.png`)}
+                          title="Low-Level Design (LLD) v1.7"
+                          label="Low Level Design"
+                        />
+                      )}
                     </div>
                   </div>
                 )}

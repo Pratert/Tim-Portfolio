@@ -4,6 +4,7 @@ import PageShell from "../../components/PageShell";
 import PageHeader from "../../components/PageHeader";
 import { projects } from "../../content/projects";
 import DiagramViewerButton from "../../components/DiagramViewerButton";
+import DocumentViewerButton from "../../components/DocumentViewerButton";
 
 export async function generateStaticParams() {
   return projects.map((project) => ({
@@ -177,9 +178,17 @@ export default async function ProjectDetailPage({ params }: Props) {
         {/* Documents */}
         <div>
           <p className="text-xs uppercase tracking-widest text-neutral-400 mb-4">Documents</p>
-          {project.documents && project.documents.length > 0 ? (
+          {(project.documents && project.documents.length > 0) || project.slug === "portfolio-platform" ? (
             <div className="grid md:grid-cols-2 gap-4">
-              {project.documents.map((d) => (
+              {project.slug === "portfolio-platform" && (
+                <DocumentViewerButton
+                  pages={Array.from({ length: 39 }, (_, i) => `/docs/LLD_Portfolio_Platform_v1.7_Page_${i + 1}.png`)}
+                  title="Low-Level Design (LLD) v1.7"
+                  label="Low-Level Design (LLD) v1.7"
+                  thumbnail
+                />
+              )}
+              {project.documents && project.documents.map((d) => (
                 <div
                   key={d.label}
                   className="border border-neutral-200 rounded-xl px-5 py-4 flex items-center justify-between gap-4"
