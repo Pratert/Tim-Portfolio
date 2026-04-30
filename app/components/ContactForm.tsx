@@ -2,121 +2,151 @@
 
 import { useState } from "react";
 
-type Status = "idle" | "sending" | "sent" | "error";
+const API_URL = "https://o4jwlupa53.execute-api.us-east-1.amazonaws.com/contact";
+
+type FormState = "idle" | "submitting" | "success" | "error";
 
 export default function ContactForm() {
-  const [status, setStatus] = useState<Status>("idle");
-  const [error, setError] = useState<string | null>(null);
+  const [formState, setFormState] = useState<FormState>("idle");
+  const [errorMessage, setErrorMessage] = useState("");
 
-  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setError(null);
-    setStatus("sending");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [company, setCompany] = useState("");
+  const [message, setMessage] = useState("");
+  const [honeypot, setHoneypot] = useState("");
 
-    const form = new FormData(e.currentTarget);
-    const payload = {
-      name: String(form.get("name") || ""),
-      email: String(form.get("email") || ""),
-      company: String(form.get("company") || ""),
-      message: String(form.get("message") || ""),
-    };
+  async function handleSubmit() {
+    if (!name.trim() || !email.trim() || !message.trim()) {
+      setErrorMessage("Name, email, and message are required.");
+      setFormState("error");
+      return;
+    }
+
+    setFormState("submitting");
+    setErrorMessage("");
 
     try {
-      // For now this is a placeholder endpoint.
-      // We’ll wire this up to AWS (API Gateway + Lambda + SES) in a later step.
-      const res = await fetch(process.env.NEXT_PUBLIC_CONTACT_ENDPOINT || "/api/contact", {
+      const res = await fetch(API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        body: JSON.stringify({ name, email, company, message, honeypot }),
       });
 
-      if (!res.ok) throw new Error("Request failed");
+      const data = await res.json();
 
-      setStatus("sent");
-      (e.currentTarget as HTMLFormElement).reset();
+      if (res.ok && data.success) {
+        setFormState("success");
+        setName("");
+        setEmail("");
+        setCompany("");
+        setMessage("");
+      } else {
+        setErrorMessage(data.error || "Something went wrong. Please try again.");
+        setFormState("error");
+      }
     } catch {
-      setStatus("error");
-      setError("Something went wrong. Please try again.");
+      setErrorMessage("Unable to send message. Please try again or reach out via LinkedIn.");
+      setFormState("error");
     }
   }
 
+  if (formState === "success") {
+    return (
+      <div className="border border-emerald-200 bg-emerald-50 rounded-xl px-6 py-8 text-center mt-6">
+        <p className="text-sm font-medium text-emerald-800 mb-1">Message sent</p>
+        <p className="text-sm text-emerald-700">
+          Thanks for reaching out. I will get back to you shortly.
+        </p>
+      </div>
+    );
+  }
+
   return (
-    <form onSubmit={onSubmit} className="mt-6 space-y-4">
-      <div className="grid gap-4 md:grid-cols-2">
-        <div className="space-y-1">
-          <label className="text-sm text-neutral-700" htmlFor="name">
+    <div className="mt-6 space-y-4">
+      {/* Honeypot field - hidden from real users */}
+      <input
+        type="text"
+        value={honeypot}
+        onChange={(e) => setHoneypot(e.target.value)}
+        style={{ display: "none" }}
+        tabIndex={-1}
+        autoComplete="off"
+      />
+
+      <div className="grid md:grid-cols-2 gap-4">
+        <div>
+          <label className="block text-xs uppercase tracking-widest text-neutral-400 mb-1.5">
             Name
           </label>
           <input
-            id="name"
-            name="name"
-            required
-            className="w-full rounded-lg border border-neutral-300 px-3 py-2 text-sm outline-none focus:border-neutral-500"
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             placeholder="Your name"
+            maxLength={100}
+            className="w-full border border-neutral-200 rounded-lg px-3 py-2 text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-neutral-300 bg-white"
           />
         </div>
-
-        <div className="space-y-1">
-          <label className="text-sm text-neutral-700" htmlFor="email">
+        <div>
+          <label className="block text-xs uppercase tracking-widest text-neutral-400 mb-1.5">
             Email
           </label>
           <input
-            id="email"
-            name="email"
             type="email"
-            required
-            className="w-full rounded-lg border border-neutral-300 px-3 py-2 text-sm outline-none focus:border-neutral-500"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             placeholder="you@email.com"
+            maxLength={100}
+            className="w-full border border-neutral-200 rounded-lg px-3 py-2 text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-neutral-300 bg-white"
           />
         </div>
       </div>
 
-      <div className="space-y-1">
-        <label className="text-sm text-neutral-700" htmlFor="company">
+      <div>
+        <label className="block text-xs uppercase tracking-widest text-neutral-400 mb-1.5">
           Company (optional)
         </label>
         <input
-          id="company"
-          name="company"
-          className="w-full rounded-lg border border-neutral-300 px-3 py-2 text-sm outline-none focus:border-neutral-500"
+          type="text"
+          value={company}
+          onChange={(e) => setCompany(e.target.value)}
           placeholder="Company / org"
+          maxLength={100}
+          className="w-full border border-neutral-200 rounded-lg px-3 py-2 text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-neutral-300 bg-white"
         />
       </div>
 
-      <div className="space-y-1">
-        <label className="text-sm text-neutral-700" htmlFor="message">
+      <div>
+        <label className="block text-xs uppercase tracking-widest text-neutral-400 mb-1.5">
           Message
         </label>
         <textarea
-          id="message"
-          name="message"
-          required
-          rows={6}
-          className="w-full rounded-lg border border-neutral-300 px-3 py-2 text-sm outline-none focus:border-neutral-500"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
           placeholder="What can I help with?"
+          maxLength={2000}
+          rows={6}
+          className="w-full border border-neutral-200 rounded-lg px-3 py-2 text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-neutral-300 bg-white resize-y"
         />
       </div>
 
-      <div className="flex items-center gap-3">
+      {formState === "error" && (
+        <p className="text-sm text-red-600">{errorMessage}</p>
+      )}
+
+      <div className="flex items-center justify-between gap-4">
+        <p className="text-xs text-neutral-400">
+          This sends directly to my inbox.
+        </p>
         <button
-          type="submit"
-          disabled={status === "sending"}
-          className="rounded-lg border border-neutral-300 px-4 py-2 text-sm hover:border-neutral-500 disabled:opacity-60"
+          onClick={handleSubmit}
+          disabled={formState === "submitting"}
+          className="inline-flex items-center gap-2 text-sm font-medium bg-neutral-900 text-white px-5 py-2 rounded-lg hover:bg-neutral-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          {status === "sending" ? "Sending..." : "Send message"}
+          {formState === "submitting" ? "Sending..." : "Send message"}
         </button>
-
-        {status === "sent" && <span className="text-sm text-neutral-700">Sent. Thanks!</span>}
-        {status === "error" && <span className="text-sm text-red-600">{error}</span>}
       </div>
-
-      <p className="mt-3 text-sm text-neutral-600">
-  This sends to my personal inbox. Please include the best way to reach you.
-</p>
-
-<p className="mt-6 text-sm text-neutral-600">
-  In AWS, I’m using API Gateway + Lambda + SES for a serverless email workflow for this contact form.
-</p>
-    </form>
+    </div>
   );
 }

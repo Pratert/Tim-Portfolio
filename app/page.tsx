@@ -85,7 +85,7 @@ export default function Home() {
               and serving as the senior technical voice in rooms where architecture decisions actually got made.
             </p>
             <p>
-              The through line across all of it is the ability to operate at both ends: deep enough to know when an architecture has a real problem, and senior enough to translate that into something a VP or a client can act on. 
+              The line across all of it is the ability to operate at both ends: deep enough to know when an architecture has a real problem, and senior enough to translate that into something a VP or a client can act on. 
               I have built delivery frameworks from scratch, and taken on the ambiguous work that falls between org chart boxes.
             </p>
             <p>
