@@ -30,12 +30,12 @@ export default function Home() {
             Knoxville, TN - Remote
           </p>
           <a
-          href="mailto:tim@tim-prater.com"
-              className="mt-1 block text-xs"
-              style={{ color: "var(--accent)", textDecoration: "underline", textUnderlineOffset: "3px" }}
-            >
-              tim@tim-prater.com
-            </a>
+            href="mailto:tim@tim-prater.com"
+            className="mt-1 block text-xs"
+            style={{ color: "var(--accent)", textDecoration: "underline", textUnderlineOffset: "3px" }}
+          >
+            tim@tim-prater.com
+          </a>
 
           <div className="mt-4 space-y-1">
             {roles.map((r) => (
@@ -80,12 +80,12 @@ export default function Home() {
               who understood how things actually worked, not just how they were documented.
             </p>
             <p>
-              Over time the work expanded. I moved into architecture, pre-sales, and technical strategy, 
-              leading RFP responses that influenced $10M+ in annual business, designing private wireless and cloud-connected solutions for enterprise and government accounts, 
+              Over time the work expanded. I moved into architecture, pre-sales, and technical strategy,
+              leading RFP responses that influenced $10M+ in annual business, designing private wireless and cloud-connected solutions for enterprise and government accounts,
               and serving as the senior technical voice in rooms where architecture decisions actually got made.
             </p>
             <p>
-              The line across all of it is the ability to operate at both ends: deep enough to know when an architecture has a real problem, and senior enough to translate that into something a VP or a client can act on. 
+              The line across all of it is the ability to operate at both ends: deep enough to know when an architecture has a real problem, and senior enough to translate that into something a VP or a client can act on.
               I have built delivery frameworks from scratch, and taken on the ambiguous work that falls between org chart boxes.
             </p>
             <p>
@@ -110,10 +110,10 @@ export default function Home() {
           {/* Stats */}
           <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
             {[
-              { value: "Technical depth", label: "19+ Years leading work in production engineering environments" },
-              { value: "Business results", label: "Signed contracts, $500K to $3M each" },
-              { value: "Operational scale", label: "Annual ticket volume reduction via frontline enablement and automation" },
-              { value: "Leadership impact", label: "Cross-functional team leadership across engineering and operations and customer-facing roles" },
+              { value: "19+", label: "Years leading work in production engineering environments" },
+              { value: "30+", label: "Signed contracts, $500K to $3M each" },
+              { value: "88%", label: "Engineering ticket volume reduction via frontline enablement, ~2,000 to ~240 monthly" },
+              { value: "11–13", label: "Cross-functional team members led across engineering, operations, and customer-facing roles" },
             ].map((s) => (
               <div key={s.label}>
                 <p
@@ -166,7 +166,6 @@ export default function Home() {
                 </div>
               ))}
             </div>
-            
           </div>
 
         </div>
