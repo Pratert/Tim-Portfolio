@@ -227,7 +227,7 @@ export default function Page() {
                     upon request.
                   </p>
                   <Link
-                    href="/contact"
+                    href="/contact/"
                     className="inline-flex items-center gap-1.5 text-xs text-neutral-700 border border-neutral-300 px-3 py-1.5 rounded hover:bg-white transition-colors"
                   >
                     Request diagrams

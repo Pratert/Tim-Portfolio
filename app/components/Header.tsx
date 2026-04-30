@@ -5,17 +5,17 @@ import { usePathname } from "next/navigation";
 
 const navItems = [
   { href: "/", label: "Home" },
-  { href: "/projects", label: "Projects" },
-  { href: "/leader", label: "Leadership" },
-  { href: "/solutions-engineering", label: "Solutions Engineering" },
-  { href: "/technology", label: "Technical Expertise" },
-  { href: "/training-consultation", label: "Training and Consultation" },
-  { href: "/contact", label: "Contact" },
+  { href: "/projects/", label: "Projects" },
+  { href: "/leader/", label: "Leadership" },
+  { href: "/solutions-engineering/", label: "Solutions Engineering" },
+  { href: "/technology/", label: "Technical Expertise" },
+  { href: "/training-consultation/", label: "Training and Consultation" },
+  { href: "/contact/", label: "Contact" },
 ];
 
 function isActivePath(pathname: string, href: string) {
   if (href === "/") return pathname === "/";
-  return pathname === href || pathname.startsWith(href + "/");
+  return pathname === href || pathname.startsWith(href);
 }
 
 export default function Header() {

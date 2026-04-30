@@ -20,7 +20,7 @@ export default function Footer() {
           For a full High Level Design to create your own website portfolio in AWS see the{" "}
           <Link
             className="underline underline-offset-4 hover:text-neutral-900"
-            href="/projects"
+            href="/projects/"
           >
             Projects
           </Link>{" "}

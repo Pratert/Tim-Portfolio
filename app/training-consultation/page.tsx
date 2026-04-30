@@ -246,7 +246,7 @@ export default function Page() {
           trying to solve, reach out via the Contact page.
         </p>
         <a
-          href="/contact"
+          href="/contact/"
           className="inline-flex items-center gap-1.5 text-xs text-neutral-700 border border-neutral-300 px-3 py-1.5 rounded hover:bg-neutral-50 transition-colors"
         >
           Get in touch

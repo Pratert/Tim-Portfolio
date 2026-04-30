@@ -36,7 +36,7 @@ export default async function ProjectDetailPage({ params }: Props) {
       {/* Back link */}
       <div className="mb-8">
         <Link
-          href="/projects"
+          href="/projects/"
           className="inline-flex items-center gap-1.5 text-xs text-neutral-500 hover:text-neutral-900 transition-colors"
         >
           <svg
