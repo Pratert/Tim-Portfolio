@@ -95,7 +95,7 @@ export default function Home() {
               intention, with clear standards, and with an eye toward what comes next.
             </p>
             <p style={{ color: "var(--text-muted)" }}>
-              Targeting principal engineering, architecture, and engineering leadership roles
+              Targeting principal solutions engineering, architecture, and engineering leadership roles
               where technical depth, business impact, and people leadership all matter. Based
               in Knoxville, TN and open to remote.
             </p>
