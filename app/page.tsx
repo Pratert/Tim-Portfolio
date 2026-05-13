@@ -49,7 +49,7 @@ export default function Home() {
             className="mt-6"
             style={{ borderTop: "1px solid var(--border-color)", paddingTop: "1rem" }}
           >
-            {/*<a
+            {/*
               href="/Tim_Prater_CV.pdf"
               download="Tim_Prater_CV.pdf"
               className="text-xs font-medium"
@@ -81,18 +81,26 @@ export default function Home() {
             </p>
             <p>
               Over time the work expanded. I moved into architecture, pre-sales, and technical strategy,
-              leading RFP responses that influenced $10M+ in annual business, designing private wireless and cloud-connected solutions for enterprise and government accounts,
+              leading RFP responses that influenced $10M+ in annual business, designing private wireless
+              and cloud-connected solutions for enterprise and government accounts with security
+              requirements spanning NIST compliance, zero trust access control, and perimeter hardening,
               and serving as the senior technical voice in rooms where architecture decisions actually got made.
             </p>
             <p>
-              The line across all of it is the ability to operate at both ends: deep enough to know when an architecture has a real problem, and senior enough to translate that into something a VP or a client can act on.
-              I have built delivery frameworks from scratch, and taken on the ambiguous work that falls between org chart boxes.
+              The line across all of it is the ability to operate at both ends: deep enough to know when
+              an architecture has a real problem or a security gap, and senior enough to translate that
+              into something a VP or a client can act on. I have built delivery frameworks from scratch,
+              and taken on the ambiguous work that falls between org chart boxes.
             </p>
             <p>
               Along the way I built and led teams, wrote training programs, created governance
-              frameworks, and developed engineers who went on to take on bigger roles themselves.
+              frameworks that included security review checkpoints and change control standards,
+              and developed engineers who went on to take on bigger roles themselves.
               I care about building people the same way I care about building systems: with
               intention, with clear standards, and with an eye toward what comes next.
+            </p>
+            <p>
+              Across private wireless, cloud, and enterprise deployments, security architecture was as central to the work as the network design itself. I have defined zero trust access models, aligned solutions to NIST control frameworks, hardened perimeters, configured WAF policies, and built governance structures with security checkpoints as first-class requirements. The clients I worked with had strict regulatory and reporting requirements that demanded security be designed in from the start.
             </p>
             <p style={{ color: "var(--text-muted)" }}>
               Targeting principal solutions engineering, architecture, and engineering leadership roles
@@ -144,7 +152,7 @@ export default function Home() {
               {[
                 { label: "Telecom and Private Wireless", sub: "LTE, 5G, EPC, private cellular, MVNO, IoT/M2M" },
                 { label: "Cloud Architecture", sub: "AWS, serverless, event-driven, IaC" },
-                { label: "Networking and Security", sub: "IP routing, BGP, OSPF, IPsec, segmentation" },
+                { label: "Networking and Security", sub: "IP routing, BGP, OSPF, IPsec, segmentation, WAF, zero trust" },
                 { label: "Systems Integration", sub: "API design, ETL, data pipelines, CI/CD" },
                 { label: "Observability and Operations", sub: "CloudWatch, monitoring, incident response" },
                 { label: "Solutions and Presales", sub: "RFP/RFI, HLD/LLD, architecture assessments" },
