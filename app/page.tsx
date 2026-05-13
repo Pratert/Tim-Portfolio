@@ -49,7 +49,7 @@ export default function Home() {
             className="mt-6"
             style={{ borderTop: "1px solid var(--border-color)", paddingTop: "1rem" }}
           >
-            <a
+            {/*<a
               href="/Tim_Prater_CV.pdf"
               download="Tim_Prater_CV.pdf"
               className="text-xs font-medium"
@@ -59,7 +59,7 @@ export default function Home() {
             </a>
             <p className="mt-1 text-xs leading-relaxed" style={{ color: "var(--text-muted)" }}>
               A shortened, tailored resume is available for specific positions.
-            </p>
+            </p>*/}
           </div>
         </div>
 
